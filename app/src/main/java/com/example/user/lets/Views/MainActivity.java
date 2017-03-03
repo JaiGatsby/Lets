@@ -1,7 +1,9 @@
-package com.example.user.lets;
+package com.example.user.lets.Views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.user.lets.R;
 
 public class MainActivity extends AppCompatActivity {
 
