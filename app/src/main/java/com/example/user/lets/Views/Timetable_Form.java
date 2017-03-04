@@ -20,7 +20,7 @@ public class Timetable_Form extends AppCompatActivity {
     CheckBox chk1, chk2, chk3, chk4, chk5, chk6, chk7;
     NumberPicker np_hours_s, np_min_s, np_hours_e, np_min_e;
     String[] hours, minutes;
-    int daysFree = 0;
+    boolean [] daysFree = new boolean[7];
     private static final String TAG = Timetable_Form.class.getName();
 
     private DatabaseReference mDatabase;
@@ -53,11 +53,20 @@ public class Timetable_Form extends AppCompatActivity {
         hours = new String[24];
         minutes = new String[12];
 
+        for(int i = 0; i < 7; i++)
+            daysFree[i] = false;
+
         for(int i = 0; i < 24; i++)
-            hours[i] = Integer.toString(i);
+            if(i < 10)
+                hours[i] = "0" + Integer.toString(i);
+            else
+                hours[i] = Integer.toString(i);
 
         for(int i = 0; i < 12; i+=1)
-            minutes[i] = Integer.toString(i*5);
+            if(i < 10)
+                minutes[i] = "0" + Integer.toString(i*5);
+            else
+                minutes[i] = Integer.toString(i*5);
 
         np_hours_s.setMinValue(0);
         np_hours_s.setMaxValue(hours.length-1);
@@ -81,9 +90,18 @@ public class Timetable_Form extends AppCompatActivity {
     {
         String UserKey = localData.getString("UserKey", "default");
         DatabaseReference curUser = mDatabase.child("Users").child(UserKey);
+
         String startTime = Integer.toString(np_hours_s.getValue()) + Integer.toString(np_min_s.getValue());
         String endTime = Integer.toString(np_hours_e.getValue()) + Integer.toString(np_min_e.getValue());
+        String daysFreeStr = "";
 
+        for(int i = 0; i < 7; i++)
+            if(daysFree[i])
+                daysFreeStr += "1";
+            else
+                daysFreeStr += "0";
+
+        curUser.child("TimeTable").push().setValue(new Timetable(daysFreeStr, startTime, endTime));
         curUser.child("TimeTable").push().setValue(new Timetable(Integer.toString(daysFree), startTime, endTime));
         Intent intent = new Intent(this, Events_Now.class);
         startActivity(intent);
@@ -98,51 +116,51 @@ public class Timetable_Form extends AppCompatActivity {
         {
             case R.id.check_mon:
                 if(checked)
-                    daysFree += 1;
+                    daysFree[0] = true;
                 else
-                    daysFree -= 1;
+                    daysFree[0] = false;
                 break;
 
             case R.id.check_tue:
                 if(checked)
-                    daysFree += 10;
+                    daysFree[1] = true;
                 else
-                    daysFree -= 10;
+                    daysFree[1] = false;
                 break;
 
             case R.id.check_wed:
                 if(checked)
-                    daysFree += 100;
+                    daysFree[2] = true;
                 else
-                    daysFree -= 100;
+                    daysFree[2] = false;
                 break;
 
             case R.id.check_thu:
                 if(checked)
-                    daysFree += 1000;
+                    daysFree[3] = true;
                 else
-                    daysFree -= 1000;
+                    daysFree[3] = false;
                 break;
 
             case R.id.check_fri:
                 if(checked)
-                    daysFree += 10000;
+                    daysFree[4] = true;
                 else
-                    daysFree -= 10000;
+                    daysFree[4] = false;
                 break;
 
             case R.id.check_sat:
                 if(checked)
-                    daysFree += 100000;
+                    daysFree[5] = true;
                 else
-                    daysFree -= 100000;
+                    daysFree[5] = false;
                 break;
 
             case R.id.check_sun:
                 if(checked)
-                    daysFree += 1000000;
+                    daysFree[6] = true;
                 else
-                    daysFree -= 1000000;
+                    daysFree[6] = false;
                 break;
         }
     }
