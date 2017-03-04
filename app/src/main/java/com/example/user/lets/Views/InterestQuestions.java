@@ -1,12 +1,10 @@
 package com.example.user.lets.Views;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 
 import com.example.user.lets.R;
@@ -26,12 +24,12 @@ public class InterestQuestions extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
+//        localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest_questions);
 
         // Sets the mDatabase to the root of the database
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+//        mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
         list = new ArrayList<String>();
@@ -49,26 +47,96 @@ public class InterestQuestions extends AppCompatActivity {
         chk10=(CheckBox)findViewById(R.id.check_Hiking);
     }
 
+    public void onCheckboxClick(View view)
+    {
+        boolean checked = ((CheckBox) view).isChecked();
+
+        switch(view.getId()){
+            case R.id.check_Football:
+                if(checked)
+                    list.add("Football");
+                else
+                    list.remove("Football");
+
+                break;
+
+            case R.id.check_Basketball:
+                if(checked)
+                    list.add("Basketball");
+                else
+                    list.remove("Basketball");
+
+            case R.id.check_Card:
+                if(checked)
+                    list.add("Card");
+                else
+                    list.remove("Card");
+
+                break;
+
+            case R.id.check_Movies:
+                if(checked)
+                    list.add("Movies");
+                else
+                    list.remove("Movies");
+
+                break;
+            case R.id.check_Clubbing:
+                if(checked)
+                    list.add("Clubbing");
+                else
+                    list.remove("Clubbing");
+
+                break;
+            case R.id.check_Drinking:
+                if(checked)
+                    list.add("Drinking");
+                else
+                    list.remove("Drinking");
+
+                break;
+            case R.id.check_Eatingin:
+                if(checked)
+                    list.add("Eatingin");
+                else
+                    list.remove("Eatingin");
+
+                break;
+            case R.id.check_Eatingout:
+                if(checked)
+                    list.add("Eatingout");
+                else
+                    list.remove("Eatingout");
+
+                break;
+            case R.id.check_Hackathons:
+                if(checked)
+                    list.add("Hackathons");
+                else
+                    list.remove("Hackathons");
+
+                break;
+
+            case R.id.check_Hiking:
+                if(checked)
+                    list.add("Hiking");
+                else
+                    list.remove("Hiking");
+
+                break;
+        }
+    }
+
     // On Click for Submit button
     public void saveCheckboxState(View view){
-        //Add checked boxes to list
-        if(chk1.isChecked()){list.add(chk1.getTag().toString());}
-        if(chk2.isChecked()){list.add(chk2.getTag().toString());}
-        if(chk3.isChecked()){list.add(chk3.getTag().toString());}
-        if(chk4.isChecked()){list.add(chk4.getTag().toString());}
-        if(chk5.isChecked()){list.add(chk5.getTag().toString());}
-        if(chk6.isChecked()){list.add(chk6.getTag().toString());}
-        if(chk7.isChecked()){list.add(chk7.getTag().toString());}
-        if(chk8.isChecked()){list.add(chk8.getTag().toString());}
-        if(chk9.isChecked()){list.add(chk9.getTag().toString());}
-        if(chk10.isChecked()){list.add(chk10.getTag().toString());}
+
 
         //Send to Firebase
 
         //Gets the UserKey from the sharedpreferences
-        String UserKey = localData.getString("UserKey","default");
-
-        DatabaseReference User = mDatabase.child("Users").child(UserKey);
+//        String UserKey = localData.getString("UserKey","default");
+//
+//        DatabaseReference User = mDatabase.child("Users").child(UserKey);
 
         //Start new activity
         Intent intent = new Intent(this, Events_Now.class);

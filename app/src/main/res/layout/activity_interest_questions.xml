@@ -40,7 +40,9 @@
             android:layout_marginLeft="27dp"
             android:layout_marginStart="27dp"
             android:layout_marginTop="17dp"
-            android:text="Football" />
+            android:text="Football"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Basketball"
@@ -51,7 +53,9 @@
             android:layout_alignTop="@+id/check_Football"
             android:layout_marginEnd="41dp"
             android:layout_marginRight="41dp"
-            android:text="Basketball" />
+            android:text="Basketball"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Card"
@@ -61,7 +65,9 @@
             android:text="Card games"
             android:layout_below="@+id/check_Football"
             android:layout_alignLeft="@+id/check_Football"
-            android:layout_alignStart="@+id/check_Football" />
+            android:layout_alignStart="@+id/check_Football"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Movies"
@@ -71,7 +77,9 @@
             android:layout_alignBottom="@+id/check_Card"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="Watching Movies" />
+            android:text="Watching Movies"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Drinking"
@@ -81,7 +89,9 @@
             android:layout_alignStart="@+id/check_Card"
             android:layout_below="@+id/check_Card"
             android:layout_marginTop="21dp"
-            android:text="Drinking" />
+            android:text="Drinking"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Clubbing"
@@ -90,7 +100,9 @@
             android:layout_alignBottom="@+id/check_Drinking"
             android:layout_alignLeft="@+id/check_Movies"
             android:layout_alignStart="@+id/check_Movies"
-            android:text="Clubbing" />
+            android:text="Clubbing"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Eatingin"
@@ -100,7 +112,9 @@
             android:layout_alignStart="@+id/check_Drinking"
             android:layout_below="@+id/check_Drinking"
             android:layout_marginTop="21dp"
-            android:text="Eating in" />
+            android:text="Eating in"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Eatingout"
@@ -109,7 +123,9 @@
             android:layout_alignBottom="@+id/check_Eatingin"
             android:layout_alignLeft="@+id/check_Clubbing"
             android:layout_alignStart="@+id/check_Clubbing"
-            android:text="Eating out" />
+            android:text="Eating out"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Hackathons"
@@ -119,7 +135,9 @@
             android:layout_alignStart="@+id/check_Eatingin"
             android:layout_below="@+id/check_Eatingin"
             android:layout_marginTop="22dp"
-            android:text="Hackathons" />
+            android:text="Hackathons"
+            android:onClick="onCheckboxClick"
+            />
 
         <CheckBox
             android:id="@+id/check_Hiking"
@@ -128,7 +146,9 @@
             android:layout_alignLeft="@+id/check_Eatingout"
             android:layout_alignStart="@+id/check_Eatingout"
             android:layout_alignTop="@+id/check_Hackathons"
-            android:text="Hiking" />
+            android:text="Hiking"
+            android:onClick="onCheckboxClick"
+            />
     </RelativeLayout>
 
     <Button
