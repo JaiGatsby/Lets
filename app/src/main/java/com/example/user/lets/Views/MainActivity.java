@@ -30,16 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button mButton = (Button) findViewById(R.id.jai_sra_jew);
-
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, Chactivity.class);
-                startActivity(in);
-            }
-        });
-
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager()));
 

@@ -144,6 +144,7 @@ public class InterestQuestions extends AppCompatActivity {
         //Start new activity
         Intent intent = new Intent(this, Timetable_Form.class);
         startActivity(intent);
+        finish();
     }
 
 

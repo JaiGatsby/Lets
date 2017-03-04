@@ -64,9 +64,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 if (user != null) {
                     // DBUser is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    sendData(user.getDisplayName());
-                    Intent in = new Intent(LoginActivity.this, InterestQuestions.class);
-                    startActivity(in);
+
+                    if(localData.getBoolean("my_first_time", true)){
+                        localData.edit().putBoolean("my_first_time", false).apply();
+                        Intent in = new Intent(LoginActivity.this, InterestQuestions.class);
+                        startActivity(in);
+                    }
+                    else{
+                        Intent in = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(in);
+                    }
+
                 } else {
                     // DBUser is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -153,6 +161,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if(result.isSuccess()){
                 GoogleSignInAccount acct = result.getSignInAccount();
                 Log.d(TAG, "signed in: " + acct.getDisplayName());
+
                 firebaseAuthWithGoogle(acct);
             }
             else{
@@ -174,7 +183,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -191,6 +200,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Log.w(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            sendData(acct.getDisplayName());
                         }
                         // ...
                     }
