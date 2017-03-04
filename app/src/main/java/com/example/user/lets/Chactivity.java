@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Chactivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
+    private DatabaseReference chatroom;
 //    private static final String TAG = "MyActivity";
 
     @Override
@@ -30,6 +31,9 @@ public class Chactivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        String eventId = (getIntent().getStringExtra("USER_KEY")=="")?"Fail":getIntent().getStringExtra("USER_KEY");
+//        String eventId = "Please";
+        chatroom = mDatabase.child("ChatRooms").child(eventId).child("Chat");
         // The basic idea is, once someone presses push, we send that data to the server
         // and empty the input field
         fab.setOnClickListener(new View.OnClickListener(){
@@ -39,7 +43,7 @@ public class Chactivity extends AppCompatActivity {
 
                 // Read the input field and push a new instance
                 // of ChatMessage to the Firebase database
-                mDatabase.push()
+                chatroom.push()
                         .setValue(new ChatMessage(input.getText().toString(),
                                 FirebaseAuth.getInstance()
                                         .getCurrentUser()
@@ -47,7 +51,7 @@ public class Chactivity extends AppCompatActivity {
                         );
                 input.setText(""); // clear the input
                 // where eventName is the id of the event
-//        DatabaseReference chatroom = mDatabase.child("ChatRooms").child(eventName).child("Chat");
+
             }
         });
 
@@ -57,7 +61,7 @@ public class Chactivity extends AppCompatActivity {
 //                String value = dataSnapshot.getValue(String.class);
 //                Log.d(TAG, "Value is: " + value);
                 // Where chatroom is the id of the chatroom/event
-//                displayChatMessages(chatroom);
+                displayChatMessages(chatroom);
             }
 
             @Override
@@ -69,11 +73,11 @@ public class Chactivity extends AppCompatActivity {
 
     private FirebaseListAdapter<ChatMessage> adapter;
 
-    public void displayChatMessages(){
+    public void displayChatMessages(DatabaseReference Chat){
         ListView listOfMessages = (ListView)findViewById(R.id.list_of_messages);
 
         adapter = new FirebaseListAdapter<ChatMessage>(this, ChatMessage.class,
-                R.layout.message, FirebaseDatabase.getInstance().getReference()) {
+                R.layout.message, Chat) {
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
                 // Get references to the views of message.xml

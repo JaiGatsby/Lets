@@ -65,9 +65,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 if (user != null) {
                     // DBUser is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    sendData(user.getDisplayName());
-                    Intent in = new Intent(LoginActivity.this, InterestQuestions.class);
-                    startActivity(in);
+
+                    if(localData.getBoolean("my_first_time", true)){
+                        localData.edit().putBoolean("my_first_time", false).apply();
+                        Intent in = new Intent(LoginActivity.this, InterestQuestions.class);
+                        startActivity(in);
+                    }
+                    else{
+                        Intent in = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(in);
+                    }
+
                 } else {
                     // DBUser is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -154,6 +162,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if(result.isSuccess()){
                 GoogleSignInAccount acct = result.getSignInAccount();
                 Log.d(TAG, "signed in: " + acct.getDisplayName());
+
                 firebaseAuthWithGoogle(acct);
             }
             else{
@@ -175,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -193,6 +202,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
+                        else {
+                            sendData(acct.getDisplayName());
+                        }
                         // ...
                     }
                 });
@@ -203,17 +215,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         String Key = curUser.getKey();
         localData.edit().putString("UserKey", Key).apply();
         Log.d(TAG, "USER_KEY ->" + Key);
-//        JSONObject newUser = new JSONObject();
-//
-//        try {
-//            newUser.put("ChatRoomIDs","0");
-//            newUser.put("ID",Key);
-//            newUser.put("Name",name);
-//            newUser.put("Interests","0");
-//            newUser.put("TimeTable","0");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+
         curUser.setValue(new DBUser(Key, name));
     }
 

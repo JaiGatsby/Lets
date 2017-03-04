@@ -17,6 +17,7 @@ import android.widget.Button;
 import com.example.user.lets.Adapter.TabFragmentPagerAdapter;
 import com.example.user.lets.Chactivity;
 import com.example.user.lets.R;
+import com.example.user.lets.Timetable_Planner;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -30,16 +31,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button mButton = (Button) findViewById(R.id.jai_sra_jew);
-
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent in = new Intent(MainActivity.this, Chactivity.class);
-                startActivity(in);
-            }
-        });
-
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         viewPager.setAdapter(new TabFragmentPagerAdapter(getSupportFragmentManager()));
 
@@ -48,16 +39,16 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_send_white_24dp),
-                        Color.parseColor(colors[0])
+                        getResources().getDrawable(R.drawable.ic_event_white_24dp),
+                        Color.parseColor(colors[4])
                 ).title("Events")
                         .badgeTitle("Events")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_send_white_24dp),
-                        Color.parseColor(colors[1])
+                        getResources().getDrawable(R.drawable.ic_chat_white_24dp),
+                        Color.parseColor(colors[2])
                 ).title("Chat")
                         .badgeTitle("Chat")
                         .build()
@@ -69,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         navigationTabBar.setTitleMode(NavigationTabBar.TitleMode.ACTIVE);
         navigationTabBar.setBadgeGravity(NavigationTabBar.BadgeGravity.BOTTOM);
         navigationTabBar.setBadgePosition(NavigationTabBar.BadgePosition.CENTER);
-        navigationTabBar.setTypeface("fonts/custom_font.ttf");
         navigationTabBar.setIsBadged(true);
         navigationTabBar.setIsTitled(true);
         navigationTabBar.setIsTinted(true);
@@ -97,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_logout:
                 FirebaseAuth.getInstance().signOut();
                 finish();
+                break;
+            case R.id.action_change_interest:
+                startActivity( new Intent(this, InterestQuestions.class));
+                break;
+            case R.id.action_change_timetable:
+                startActivity(new Intent(this, Timetable_Planner.class));
                 break;
         }
         return true;

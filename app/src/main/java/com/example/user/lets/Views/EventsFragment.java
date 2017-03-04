@@ -2,14 +2,19 @@ package com.example.user.lets.Views;
 
 import android.content.Context;
 import android.net.Uri;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.user.lets.Chactivity;
 import com.example.user.lets.DBEvent;
 import com.example.user.lets.R;
 import com.firebase.ui.database.FirebaseListAdapter;
@@ -58,12 +63,12 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        displayEvents(mDatabase.child("eventtest"), rootView);
+        displayEvents(mDatabase.child("ChatRooms"), rootView);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,7 +77,7 @@ public class EventsFragment extends Fragment {
 //                Log.d(TAG, "Value is: " + value);
 
 
-//                displayEvents(mDatabase.child("ChatRooms"));
+                displayEvents(mDatabase.child("ChatRooms"),rootView);
             }
 
             @Override
@@ -105,13 +110,23 @@ public class EventsFragment extends Fragment {
                 eventTime.setText(model.getTime());
                 eventDate.setText(model.getDate());
                 eventSize.setText(String.valueOf(model.getNumberOfPeople()));
-//                Log.d(TAG,"TEST_SIZE:"+model.getNumberOfPeople());
 
                 // Format the date before showing it
 //                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
 //                        model.getMessageTime()));
             }
         };
+
+        listOfMessages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), Chactivity.class);
+                String key = adapter.getItem(position).getId();
+                Log.d(TAG,"DEBUG_KEY"+key);
+                intent.putExtra("USER_KEY",key);
+                startActivity(intent);
+            }
+        });
 
         if(listOfMessages != null)
             listOfMessages.setAdapter(adapter);
