@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.Button;
 
 import com.example.user.lets.R;
 import com.google.firebase.database.DatabaseReference;
@@ -60,12 +59,12 @@ public class InterestQuestions extends AppCompatActivity {
         if(chk9.isChecked()){list.add(chk9.getTag().toString());}
         if(chk10.isChecked()){list.add(chk10.getTag().toString());}
 
-        //Send to Firebase
-
         //Gets the UserKey from the sharedpreferences
         String UserKey = localData.getString("UserKey","default");
 
-        DatabaseReference User = mDatabase.child("Users").child(UserKey);
+        DatabaseReference User = mDatabase.child("Users").child(UserKey).child("Interests");
+
+        User.setValue(list);
 
         //Start new activity
         Intent intent = new Intent(this, Events_Now.class);
