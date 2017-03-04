@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Lets</string>
     <string name="title_activity_login">Sign in</string>
-    jj
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
@@ -14,6 +14,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="web_client_id">330585574180-11n40rguk1j3lo5q2t1ueq2l3n3oo7mk.apps.googleusercontent.com</string>
     <string name="questionairre_prompt">Tick activities that interest you</string>
 
 </resources>
