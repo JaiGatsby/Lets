@@ -61,12 +61,12 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        displayEvents(mDatabase.child("ChatRooms"));
+        displayEvents(mDatabase.child("ChatRooms"), rootView);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -75,7 +75,7 @@ public class EventsFragment extends Fragment {
 //                Log.d(TAG, "Value is: " + value);
 
 
-                displayEvents(mDatabase.child("ChatRooms"));
+                displayEvents(mDatabase.child("ChatRooms"), rootView);
             }
 
             @Override
