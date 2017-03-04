@@ -10,8 +10,11 @@ import android.widget.TextView;
 import com.example.user.lets.DBEvent;
 import com.example.user.lets.R;
 import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Events_Now extends AppCompatActivity {
 
@@ -25,14 +28,32 @@ public class Events_Now extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        displayChatMessages(mDatabase.child("eventtest"));
 
+        displayEvents(mDatabase.child("eventtest"));
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String value = dataSnapshot.getValue(String.class);
+//                Log.d(TAG, "Value is: " + value);
+
+
+//                displayEvents(mDatabase.child("ChatRooms"));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+//                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
+
+
 
     private FirebaseListAdapter<DBEvent> adapter;
 
     // Remember to pass the reference to the function before calling it
-    public void displayChatMessages(DatabaseReference chat){
+    public void displayEvents(DatabaseReference chat){
         ListView listOfMessages = (ListView)findViewById(R.id.list_of_events);
 
         adapter = new FirebaseListAdapter<DBEvent>(this, DBEvent.class,

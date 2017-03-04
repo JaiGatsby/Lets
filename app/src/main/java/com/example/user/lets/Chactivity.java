@@ -46,7 +46,8 @@ public class Chactivity extends AppCompatActivity {
                                         .getDisplayName())
                         );
                 input.setText(""); // clear the input
-                displayChatMessages();
+                // where eventName is the id of the event
+//        DatabaseReference chatroom = mDatabase.child("ChatRooms").child(eventName).child("Chat");
             }
         });
 
@@ -55,7 +56,8 @@ public class Chactivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                String value = dataSnapshot.getValue(String.class);
 //                Log.d(TAG, "Value is: " + value);
-                displayChatMessages();
+                // Where chatroom is the id of the chatroom/event
+//                displayChatMessages(chatroom);
             }
 
             @Override

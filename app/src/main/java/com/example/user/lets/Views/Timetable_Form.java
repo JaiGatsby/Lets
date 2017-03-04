@@ -1,6 +1,7 @@
 package com.example.user.lets.Views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -84,6 +85,8 @@ public class Timetable_Form extends AppCompatActivity {
         String endTime = Integer.toString(np_hours_e.getValue()) + Integer.toString(np_min_e.getValue());
 
         curUser.child("TimeTable").push().setValue(new Timetable(Integer.toString(daysFree), startTime, endTime));
+        Intent intent = new Intent(this, Events_Now.class);
+        startActivity(intent);
     }
 
 
