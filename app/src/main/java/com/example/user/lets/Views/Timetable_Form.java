@@ -1,8 +1,10 @@
 package com.example.user.lets.Views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -100,6 +102,9 @@ public class Timetable_Form extends AppCompatActivity {
                 daysFreeStr += "0";
 
         curUser.child("TimeTable").push().setValue(new Timetable(daysFreeStr, startTime, endTime));
+        curUser.child("TimeTable").push().setValue(new Timetable(Integer.toString(daysFree), startTime, endTime));
+        Intent intent = new Intent(this, Events_Now.class);
+        startActivity(intent);
     }
 
 
