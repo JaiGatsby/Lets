@@ -50,7 +50,7 @@ public class Events_Now extends AppCompatActivity {
                 eventTime.setText(model.getTime());
                 eventDate.setText(model.getDate());
                 eventSize.setText(String.valueOf(model.getNumberOfPeople()));
-                Log.d(TAG,"TEST_SIZE:"+String.valueOf(model.getNumberOfPeople()));
+//                Log.d(TAG,"TEST_SIZE:"+model.getNumberOfPeople());
 
                 // Format the date before showing it
 //                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",

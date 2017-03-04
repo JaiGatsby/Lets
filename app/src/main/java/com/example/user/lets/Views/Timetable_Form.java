@@ -1,6 +1,9 @@
 package com.example.user.lets.Views;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -8,6 +11,8 @@ import android.widget.NumberPicker;
 
 import com.example.user.lets.R;
 import com.example.user.lets.Timetable;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Timetable_Form extends AppCompatActivity {
 
@@ -17,11 +22,19 @@ public class Timetable_Form extends AppCompatActivity {
     int daysFree = 0;
     private static final String TAG = Timetable_Form.class.getName();
 
+    private DatabaseReference mDatabase;
+
+    SharedPreferences localData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timetable__form);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
 
         chk1=(CheckBox)findViewById(R.id.check_mon);
         chk2=(CheckBox)findViewById(R.id.check_tue);
@@ -34,7 +47,7 @@ public class Timetable_Form extends AppCompatActivity {
         np_hours_s = (NumberPicker)findViewById(R.id.np_h_start);
         np_min_s = (NumberPicker)findViewById(R.id.np_m_start);
         np_hours_e  = (NumberPicker)findViewById(R.id.np_h_end);
-        np_min_s = (NumberPicker)findViewById(R.id.np_m_end);
+        np_min_e = (NumberPicker)findViewById(R.id.np_m_end);
 
         hours = new String[24];
         minutes = new String[12];
@@ -65,10 +78,12 @@ public class Timetable_Form extends AppCompatActivity {
 
     public void sendForm(View view)
     {
+        String UserKey = localData.getString("UserKey", "default");
+        DatabaseReference curUser = mDatabase.child("Users").child(UserKey);
         String startTime = Integer.toString(np_hours_s.getValue()) + Integer.toString(np_min_s.getValue());
         String endTime = Integer.toString(np_hours_e.getValue()) + Integer.toString(np_min_e.getValue());
 
-        Timetable slot= new Timetable(Integer.toString(daysFree), startTime, endTime);
+        curUser.child("TimeTable").push().setValue(new Timetable(Integer.toString(daysFree), startTime, endTime));
     }
 
 

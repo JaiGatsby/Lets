@@ -15,4 +15,11 @@ public class Timetable {
         startTime = startTime_;
         endTime = endTime_;
     }
+
+    public String getDays(){return days;}
+    public void setDays(String days_){days=days_;}
+    public String getStartTime(){return startTime;}
+    public void setStartTime(String days_){startTime=days_;}
+    public String getEndTime(){return endTime;}
+    public void setEndTime(String days_){endTime=days_;}
 }

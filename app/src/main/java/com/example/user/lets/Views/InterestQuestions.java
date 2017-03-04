@@ -142,7 +142,7 @@ public class InterestQuestions extends AppCompatActivity {
         User.setValue(list);
 
         //Start new activity
-        Intent intent = new Intent(this, Events_Now.class);
+        Intent intent = new Intent(this, Timetable_Form.class);
         startActivity(intent);
     }
 
