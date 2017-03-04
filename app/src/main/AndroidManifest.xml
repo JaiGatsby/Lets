@@ -22,8 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Views.LoginActivity"></activity>
-        <activity android:name=".Chactivity"></activity>
+        <activity android:name=".Views.LoginActivity" />
+        <activity android:name=".Chactivity" />
+        <activity android:name=".Views.Events_Now"></activity>
     </application>
 
 </manifest>
