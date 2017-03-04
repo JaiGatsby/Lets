@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "330585574180",
+    "firebase_url": "https://lets-d570f.firebaseio.com",
+    "project_id": "lets-d570f",
+    "storage_bucket": "lets-d570f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330585574180:android:4be370bfeb62f6fe",
+        "android_client_info": {
+          "package_name": "com.example.user.lets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330585574180-dnm3fgl728p6fpu2e8d1antnjih89iv2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.lets",
+            "certificate_hash": "eb7b2297983e222cdbd2084d1dfac6845f63c455"
+          }
+        },
+        {
+          "client_id": "330585574180-11n40rguk1j3lo5q2t1ueq2l3n3oo7mk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz5OWG2XLRjVgAQHvG2XFYTj1geYKSh8U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330585574180-11n40rguk1j3lo5q2t1ueq2l3n3oo7mk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
