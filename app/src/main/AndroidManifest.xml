@@ -27,7 +27,7 @@
         <activity android:name=".Views.InterestQuestions" />
         <activity android:name=".Views.Events_Now" />
         <activity android:name=".Timetable_Planner" />
-        <activity android:name=".Timetable_Form"></activity>
+        <activity android:name=".Views.Timetable_Form"></activity>
     </application>
 
 </manifest>

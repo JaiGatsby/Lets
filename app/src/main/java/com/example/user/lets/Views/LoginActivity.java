@@ -38,6 +38,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
 
@@ -183,6 +185,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void sendData(String name){
 
+    }
+
+    public void debuger(View v){
+        //For debugging
+
+        Intent intent = new Intent(this, InterestQuestions.class);
+        startActivity(intent);
+        //End debugging
     }
 
 }
