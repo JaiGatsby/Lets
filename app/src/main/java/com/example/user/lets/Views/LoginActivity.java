@@ -1,6 +1,8 @@
 package com.example.user.lets.Views;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.user.lets.DBUser;
 import com.example.user.lets.R;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -23,6 +26,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static com.firebase.ui.auth.ui.AcquireEmailHelper.RC_SIGN_IN;
 
@@ -32,6 +37,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = LoginActivity.class.getName();
     GoogleApiClient mGoogleApiClient;
+
+    private SharedPreferences localData;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +51,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mAuth = FirebaseAuth.getInstance();
         findViewById(R.id.sign_in_button).setOnClickListener(this);
 
+        // initializing the shared localdata
+        localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
+
+        // Firebase stuff
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
+                    // DBUser is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     sendData(user.getDisplayName());
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(in);
                 } else {
-                    // User is signed out
+                    // DBUser is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
                 // ...
@@ -184,7 +198,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void sendData(String name){
-
+        DatabaseReference curUser = mDatabase.child("Users").push();
+        String Key = curUser.getKey();
+        localData.edit().putString("UserKey", Key).apply();
+        Log.d(TAG, "USER_KEY ->" + Key);
+//        JSONObject newUser = new JSONObject();
+//
+//        try {
+//            newUser.put("ChatRoomIDs","0");
+//            newUser.put("ID",Key);
+//            newUser.put("Name",name);
+//            newUser.put("Interests","0");
+//            newUser.put("TimeTable","0");
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        curUser.setValue(new DBUser(Key, name));
     }
 
     public void debuger(View v){
