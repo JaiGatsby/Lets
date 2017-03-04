@@ -17,6 +17,7 @@ import android.widget.Button;
 import com.example.user.lets.Adapter.TabFragmentPagerAdapter;
 import com.example.user.lets.Chactivity;
 import com.example.user.lets.R;
+import com.example.user.lets.Timetable_Planner;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_event_white_24dp),
-                        Color.parseColor(colors[0])
+                        Color.parseColor(colors[4])
                 ).title("Events")
                         .badgeTitle("Events")
                         .build()
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_chat_white_24dp),
-                        Color.parseColor(colors[1])
+                        Color.parseColor(colors[2])
                 ).title("Chat")
                         .badgeTitle("Chat")
                         .build()
@@ -59,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         navigationTabBar.setTitleMode(NavigationTabBar.TitleMode.ACTIVE);
         navigationTabBar.setBadgeGravity(NavigationTabBar.BadgeGravity.BOTTOM);
         navigationTabBar.setBadgePosition(NavigationTabBar.BadgePosition.CENTER);
-        navigationTabBar.setTypeface("fonts/custom_font.ttf");
         navigationTabBar.setIsBadged(true);
         navigationTabBar.setIsTitled(true);
         navigationTabBar.setIsTinted(true);
@@ -87,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_logout:
                 FirebaseAuth.getInstance().signOut();
                 finish();
+                break;
+            case R.id.action_change_interest:
+                startActivity( new Intent(this, InterestQuestions.class));
+                break;
+            case R.id.action_change_timetable:
+                startActivity(new Intent(this, Timetable_Planner.class));
                 break;
         }
         return true;
