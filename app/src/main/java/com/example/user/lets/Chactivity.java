@@ -31,8 +31,8 @@ public class Chactivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-//        String eventId = (getIntent().getStringExtra("EXTRA_SESSION_ID")=="")?"Fail":getIntent().getStringExtra("EXTRA_SESSION_ID");
-        String eventId = "Please";
+        String eventId = (getIntent().getStringExtra("USER_KEY")=="")?"Fail":getIntent().getStringExtra("USER_KEY");
+//        String eventId = "Please";
         chatroom = mDatabase.child("ChatRooms").child(eventId).child("Chat");
         // The basic idea is, once someone presses push, we send that data to the server
         // and empty the input field

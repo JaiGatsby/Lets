@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -75,7 +77,7 @@ public class EventsFragment extends Fragment {
 //                Log.d(TAG, "Value is: " + value);
 
 
-                displayEvents(mDatabase.child("ChatRooms"), rootView);
+                displayEvents(mDatabase.child("ChatRooms"),rootView);
             }
 
             @Override
@@ -114,6 +116,17 @@ public class EventsFragment extends Fragment {
 //                        model.getMessageTime()));
             }
         };
+
+        listOfMessages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), Chactivity.class);
+                String key = adapter.getItem(position).getId();
+                Log.d(TAG,"DEBUG_KEY"+key);
+                intent.putExtra("USER_KEY",key);
+                startActivity(intent);
+            }
+        });
 
         if(listOfMessages != null)
             listOfMessages.setAdapter(adapter);
