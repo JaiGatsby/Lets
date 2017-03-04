@@ -25,7 +25,6 @@
         </activity>
         <activity android:name=".Chactivity" />
         <activity android:name=".Views.InterestQuestions" />
-        <activity android:name=".Views.Events_Now" />
         <activity android:name=".Timetable_Planner" />
         <activity android:name=".Views.Timetable_Form"></activity>
     </application>
