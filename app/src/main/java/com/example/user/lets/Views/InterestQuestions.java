@@ -1,6 +1,8 @@
 package com.example.user.lets.Views;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,15 +21,18 @@ public class InterestQuestions extends AppCompatActivity {
     ArrayList<String> list ;
     CheckBox chk1,chk2,chk3,chk4,chk5,chk6,chk7,chk8,chk9,chk10;
 
-
-    private Button msendInterest;
+    private SharedPreferences localData;
 
     private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest_questions);
+
+        // Sets the mDatabase to the root of the database
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         chk1=(CheckBox)findViewById(R.id.check_Football);
         chk2=(CheckBox)findViewById(R.id.check_Basketball);
@@ -41,7 +46,7 @@ public class InterestQuestions extends AppCompatActivity {
         chk10=(CheckBox)findViewById(R.id.check_Hiking);
     }
 
-
+    // On Click for Submit button
     public void saveCheckboxState(View view){
         //Add checked boxes to list
         if(chk1.isChecked()){list.add(chk1.getTag().toString());}
@@ -57,6 +62,10 @@ public class InterestQuestions extends AppCompatActivity {
 
         //Send to Firebase
 
+        //Gets the UserKey from the sharedpreferences
+        String UserKey = localData.getString("UserKey","default");
+
+        DatabaseReference User = mDatabase.child("Users").child(UserKey);
 
         //Start new activity
         Intent intent = new Intent(this, Events_Now.class);
