@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    sendData(user.getDisplayName());
                     Intent in = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(in);
                 } else {
@@ -178,6 +179,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         // ...
                     }
                 });
+    }
+
+    private void sendData(String name){
+
     }
 
 }
