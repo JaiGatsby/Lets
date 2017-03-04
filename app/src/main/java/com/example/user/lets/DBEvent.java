@@ -9,14 +9,24 @@ public class DBEvent {
     private String Date;
     private String Time;
     private int numberOfPeople;
+    private String id;
 
     public DBEvent(){    }
+
+    public DBEvent (String Name, String Date, String Time, int numberofPeople, String id){
+        this.Name = Name;
+        this.Date = Date;
+        this.Time = Time;
+        this.numberOfPeople = numberofPeople;
+        this.id = id;
+    }
 
     public DBEvent (String Name, String Date, String Time, int numberofPeople){
         this.Name = Name;
         this.Date = Date;
         this.Time = Time;
         this.numberOfPeople = numberofPeople;
+        this.id = id;
     }
 
     public String getName(){return this.Name;}
@@ -30,5 +40,8 @@ public class DBEvent {
 
     public int getNumberOfPeople(){return numberOfPeople;}
     public void setNumberOfPeople(int numberOfPeople){this.numberOfPeople=numberOfPeople;}
+
+    public String getId(){return id;}
+    public void setId(String id_){id=id_;}
 
 }

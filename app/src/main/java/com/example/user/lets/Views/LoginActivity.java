@@ -202,17 +202,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         String Key = curUser.getKey();
         localData.edit().putString("UserKey", Key).apply();
         Log.d(TAG, "USER_KEY ->" + Key);
-//        JSONObject newUser = new JSONObject();
-//
-//        try {
-//            newUser.put("ChatRoomIDs","0");
-//            newUser.put("ID",Key);
-//            newUser.put("Name",name);
-//            newUser.put("Interests","0");
-//            newUser.put("TimeTable","0");
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+
         curUser.setValue(new DBUser(Key, name));
     }
 
