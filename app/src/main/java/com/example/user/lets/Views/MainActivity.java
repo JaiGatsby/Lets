@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_send_white_24dp),
+                        getResources().getDrawable(R.drawable.ic_event_white_24dp),
                         Color.parseColor(colors[0])
                 ).title("Events")
                         .badgeTitle("Events")
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_send_white_24dp),
+                        getResources().getDrawable(R.drawable.ic_chat_white_24dp),
                         Color.parseColor(colors[1])
                 ).title("Chat")
                         .badgeTitle("Chat")
