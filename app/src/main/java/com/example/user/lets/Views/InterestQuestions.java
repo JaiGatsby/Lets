@@ -1,14 +1,17 @@
 package com.example.user.lets.Views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Button;
 
 import com.example.user.lets.R;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -24,16 +27,12 @@ public class InterestQuestions extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
+        localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interest_questions);
 
         // Sets the mDatabase to the root of the database
-//        mDatabase = FirebaseDatabase.getInstance().getReference();
-
-
-        list = new ArrayList<String>();
-
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         chk1=(CheckBox)findViewById(R.id.check_Football);
         chk2=(CheckBox)findViewById(R.id.check_Basketball);
@@ -129,14 +128,17 @@ public class InterestQuestions extends AppCompatActivity {
 
     // On Click for Submit button
     public void saveCheckboxState(View view){
+        //Add checked boxes to list
 
 
         //Send to Firebase
 
         //Gets the UserKey from the sharedpreferences
-//        String UserKey = localData.getString("UserKey","default");
-//
-//        DatabaseReference User = mDatabase.child("Users").child(UserKey);
+        String UserKey = localData.getString("UserKey","default");
+
+        DatabaseReference User = mDatabase.child("Users").child(UserKey).child("Interests");
+
+        User.setValue(list);
 
         //Start new activity
         Intent intent = new Intent(this, Events_Now.class);

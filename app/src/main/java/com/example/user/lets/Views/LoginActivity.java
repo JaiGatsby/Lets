@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     // DBUser is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     sendData(user.getDisplayName());
-                    Intent in = new Intent(LoginActivity.this, MainActivity.class);
+                    Intent in = new Intent(LoginActivity.this, InterestQuestions.class);
                     startActivity(in);
                 } else {
                     // DBUser is signed out
