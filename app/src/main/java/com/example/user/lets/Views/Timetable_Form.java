@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -50,6 +49,7 @@ public class Timetable_Form extends AppCompatActivity {
         np_hours_e  = (NumberPicker)findViewById(R.id.np_h_end);
         np_min_e = (NumberPicker)findViewById(R.id.np_m_end);
 
+
         hours = new String[24];
         minutes = new String[12];
 
@@ -57,16 +57,12 @@ public class Timetable_Form extends AppCompatActivity {
             daysFree[i] = false;
 
         for(int i = 0; i < 24; i++)
-            if(i < 9)
-                hours[i] = "0" + Integer.toString(i);
-            else
                 hours[i] = Integer.toString(i);
 
+
         for(int i = 0; i < 12; i++)
-            if(i < 9)
-                minutes[i] = "0" + Integer.toString(i*5);
-            else
                 minutes[i] = Integer.toString(i*5);
+
 
         np_hours_s.setMinValue(0);
         np_hours_s.setMaxValue(hours.length-1);
@@ -86,13 +82,29 @@ public class Timetable_Form extends AppCompatActivity {
 
     }
 
+    public String fix(int time, boolean min)
+    {
+        String result = "";
+        if(min)
+            time *= 5;
+
+        if(time < 10)
+            result += "0";
+
+        result += time;
+
+        return result;
+    }
+
+
     public void sendForm(View view)
     {
         String UserKey = localData.getString("UserKey", "default");
         DatabaseReference curUser = mDatabase.child("Users").child(UserKey);
 
-        String startTime = Integer.toString(np_hours_s.getValue()) + Integer.toString(np_min_s.getValue());
-        String endTime = Integer.toString(np_hours_e.getValue()) + Integer.toString(np_min_e.getValue());
+        String startTime = fix(np_hours_s.getValue(), false) +  fix(np_min_s.getValue(), true);
+        String endTime = fix(np_hours_e.getValue(), false) + fix(np_min_e.getValue(), true);
+
         String daysFreeStr = "";
 
         for(int i = 0; i < 7; i++)
@@ -102,7 +114,6 @@ public class Timetable_Form extends AppCompatActivity {
                 daysFreeStr += "0";
 
         curUser.child("TimeTable").push().setValue(new Timetable(daysFreeStr, startTime, endTime));
-        curUser.child("TimeTable").push().setValue(new Timetable(Integer.toString(daysFree), startTime, endTime));
         Intent intent = new Intent(this, Events_Now.class);
         startActivity(intent);
     }
