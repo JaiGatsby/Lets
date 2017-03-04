@@ -15,4 +15,6 @@
         completions."
     </string>
     <string name="web_client_id">330585574180-11n40rguk1j3lo5q2t1ueq2l3n3oo7mk.apps.googleusercontent.com</string>
+    <string name="questionairre_prompt">Tick activities that interest you</string>
+
 </resources>
