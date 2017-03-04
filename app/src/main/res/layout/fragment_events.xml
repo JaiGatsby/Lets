@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.user.lets.Views.Events_Now">
+    tools:context="com.example.user.lets.Views.MainActivity">
 
     <ListView
         android:id="@+id/list_of_events"
