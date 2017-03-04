@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.Button;
 
 import com.example.user.lets.R;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +32,8 @@ public class InterestQuestions extends AppCompatActivity {
 
         // Sets the mDatabase to the root of the database
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        list = new ArrayList<>();
 
         chk1=(CheckBox)findViewById(R.id.check_Football);
         chk2=(CheckBox)findViewById(R.id.check_Basketball);

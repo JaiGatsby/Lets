@@ -219,7 +219,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void debuger(View v){
         //For debugging
 
-        Intent intent = new Intent(this, InterestQuestions.class);
+        Intent intent = new Intent(this, Timetable_Form.class);
         startActivity(intent);
         //End debugging
     }
