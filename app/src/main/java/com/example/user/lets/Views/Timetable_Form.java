@@ -55,13 +55,13 @@ public class Timetable_Form extends AppCompatActivity {
             daysFree[i] = false;
 
         for(int i = 0; i < 24; i++)
-            if(i < 10)
+            if(i < 9)
                 hours[i] = "0" + Integer.toString(i);
             else
                 hours[i] = Integer.toString(i);
 
-        for(int i = 0; i < 12; i+=1)
-            if(i < 10)
+        for(int i = 0; i < 12; i++)
+            if(i < 9)
                 minutes[i] = "0" + Integer.toString(i*5);
             else
                 minutes[i] = Integer.toString(i*5);
