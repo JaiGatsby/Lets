@@ -68,7 +68,7 @@ public class EventsFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
-        displayEvents(mDatabase.child("ChatRooms"),rootView);
+        displayEvents(mDatabase.child("ChatRooms"), rootView);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
