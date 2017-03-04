@@ -122,7 +122,12 @@ public class ChatFragment extends Fragment {
             }
         };
 
-        listOfMessages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+        if(listOfMessages != null)
+            listOfMessages.setAdapter(adapter);
+
+            listOfMessages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), Chactivity.class);
@@ -132,8 +137,5 @@ public class ChatFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        if(listOfMessages != null)
-            listOfMessages.setAdapter(adapter);
     }
 }
