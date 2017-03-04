@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.user.lets.Chactivity;
 import com.example.user.lets.DBUser;
 import com.example.user.lets.R;
 import com.google.android.gms.auth.api.Auth;
@@ -221,7 +222,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void debuger(View v){
         //For debugging
 
-        Intent intent = new Intent(this, Timetable_Form.class);
+        Intent intent = new Intent(this, Chactivity.class);
         startActivity(intent);
         //End debugging
     }
