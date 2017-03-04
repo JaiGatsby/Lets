@@ -116,6 +116,7 @@ public class Timetable_Form extends AppCompatActivity {
         curUser.child("TimeTable").push().setValue(new Timetable(daysFreeStr, startTime, endTime));
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
 
