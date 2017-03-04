@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.user.lets.Views.Timetable_Form;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +23,7 @@ public class Timetable_Planner extends AppCompatActivity {
     private DatabaseReference mDatabase;
     SharedPreferences localData;
 
-
+    String UserKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class Timetable_Planner extends AppCompatActivity {
 
 
         localData = this.getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
-        String UserKey = localData.getString("UserKey", "default");
+        UserKey = localData.getString("UserKey", "default");
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -52,11 +53,11 @@ public class Timetable_Planner extends AppCompatActivity {
 
     private FirebaseListAdapter<Timetable> adapter;
 
-    public void displayChatMessages() {
+    public void displayTimeTables() {
         ListView listOfSlots = (ListView) findViewById(R.id.list_of_slots);
 
         adapter = new FirebaseListAdapter<Timetable>(this, Timetable.class,
-                R.layout.time_slot, FirebaseDatabase.getInstance().getReference()) {
+                R.layout.time_slot, FirebaseDatabase.getInstance().getReference().child("Users").child(UserKey).child("TimeTable")) {
             @Override
             protected void populateView(View v, Timetable model, int position) {
                 // Get references to the views of message.xml
@@ -78,7 +79,7 @@ public class Timetable_Planner extends AppCompatActivity {
 
     public void createTimeForm(View v)
     {
-        Intent intent = new Intent(this, Chactivity.class);
+        Intent intent = new Intent(this, Timetable_Form.class);
         startActivity(intent);
     }
 }
