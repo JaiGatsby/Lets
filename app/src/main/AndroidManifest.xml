@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Chactivity"></activity>
+        <activity android:name=".Views.InterestQuestions"></activity>
+        <activity android:name=".Views.Events_Now"></activity>
     </application>
 
 </manifest>
