@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.example.user.lets.Chactivity;
 import com.example.user.lets.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button mButton = (Button) findViewById(R.id.jai_sra_jew);
+        Button signOutButton = (Button) findViewById(R.id.sign_out);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,5 +27,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(in);
             }
         });
+
+        signOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                finish();
+            }
+        });
+
+
     }
 }
