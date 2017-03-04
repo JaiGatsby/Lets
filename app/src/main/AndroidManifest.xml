@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Views.LoginActivity"></activity>
+        <activity android:name=".Chactivity"></activity>
     </application>
 
 </manifest>
