@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
