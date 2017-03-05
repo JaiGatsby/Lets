@@ -26,10 +26,12 @@ public class ApiClient {
                 .addPathSegment(getRecommendedEndpoint)
                 .addQueryParameter("id", id)
                 .build();
+
         Request request= new Request.Builder()
                 .get()
                 .url(httpUrl)
                 .build();
+
         return OkHttpSingleton.getOkHttpInstance().getOkHttpClient().newCall(request);
     }
 }

@@ -72,7 +72,7 @@ public class ChatFragment extends Fragment {
 
         final String userKey = localData.getString("UserKey", "default");
 
-        DatabaseReference a =mDatabase.child("Users").child(userKey).child("ChatRooms");
+        DatabaseReference a =mDatabase.child("Users").child(userKey).child("Chatroom");
 
         displayEvents(a,rootView);
 
@@ -82,7 +82,7 @@ public class ChatFragment extends Fragment {
 
 //                for(DataSnapshot child:dataSnapshot.getChildren()){
 //                    String roomKey = child.getValue().toString();
-                    displayEvents(mDatabase.child("Users").child(userKey).child("ChatRooms"),rootView);
+                    displayEvents(mDatabase.child("Users").child(userKey).child("Chatroom"),rootView);
 //                }
             }
 
