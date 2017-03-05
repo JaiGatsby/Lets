@@ -34,8 +34,8 @@ public class Chactivity extends AppCompatActivity {
         String eventId = (getIntent().getStringExtra("USER_KEY")=="")?"Fail":getIntent().getStringExtra("USER_KEY");
 //        String eventId = "Please";
         chatroom = mDatabase.child("ChatRooms").child(eventId).child("Chat");
-        // The basic idea is, once someone presses push, we send that data to the server
-        // and empty the input field
+//         The basic idea is, once someone presses push, we send that data to the server
+//         and empty the input field
         fab.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
