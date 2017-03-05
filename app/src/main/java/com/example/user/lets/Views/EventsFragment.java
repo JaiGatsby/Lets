@@ -1,6 +1,7 @@
 package com.example.user.lets.Views;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -33,6 +34,7 @@ public class EventsFragment extends Fragment {
     private int page;
 
     private DatabaseReference mDatabase;
+    SharedPreferences localData;
     private static final String TAG = MainActivity.class.getName();
 
 
@@ -67,7 +69,7 @@ public class EventsFragment extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
+        localData = getActivity().getSharedPreferences("com.example.user.lets", Context.MODE_PRIVATE);
         displayEvents(mDatabase.child("ChatRooms"), rootView);
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -124,6 +126,8 @@ public class EventsFragment extends Fragment {
                 String key = adapter.getItem(position).getId();
                 Log.d(TAG,"DEBUG_KEY"+key);
                 intent.putExtra("USER_KEY",key);
+                mDatabase.child("Users").child(localData.getString("UserKey", "default"))
+                        .child("Chatroom").child(key).setValue(adapter.getItem(position));
                 startActivity(intent);
             }
         });

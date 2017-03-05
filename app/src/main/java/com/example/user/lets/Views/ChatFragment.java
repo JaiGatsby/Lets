@@ -74,14 +74,16 @@ public class ChatFragment extends Fragment {
 
         DatabaseReference a =mDatabase.child("Users").child(userKey).child("ChatRooms");
 
-        a.addValueEventListener(new ValueEventListener() {
+        displayEvents(a,rootView);
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot child:dataSnapshot.getChildren()){
-                    String roomKey = child.getValue().toString();
-                    displayEvents(mDatabase.child("ChatRooms").child(roomKey),rootView);
-                }
+//                for(DataSnapshot child:dataSnapshot.getChildren()){
+//                    String roomKey = child.getValue().toString();
+                    displayEvents(mDatabase.child("Users").child(userKey).child("ChatRooms"),rootView);
+//                }
             }
 
             @Override
@@ -101,7 +103,7 @@ public class ChatFragment extends Fragment {
         ListView listOfMessages = (ListView) view.findViewById(R.id.list_of_events);
 
         adapter = new FirebaseListAdapter<DBEvent>(getActivity(), DBEvent.class,
-                R.layout.event_list, chat) {
+                R.layout.fuck_me, chat) {
             @Override
             protected void populateView(View v, DBEvent model, int position) {
                 // Get references to the views of message.xml
@@ -122,14 +124,10 @@ public class ChatFragment extends Fragment {
             }
         };
 
-
-
-        if(listOfMessages != null)
-            listOfMessages.setAdapter(adapter);
-
-            listOfMessages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listOfMessages.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Intent intent = new Intent(getActivity(), Chactivity.class);
                 String key = adapter.getItem(position).getId();
 //                Log.d(TAG,"DEBUG_KEY"+key);
@@ -137,5 +135,8 @@ public class ChatFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        if(listOfMessages != null)
+            listOfMessages.setAdapter(adapter);
     }
 }
